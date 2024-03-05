@@ -45,17 +45,30 @@ pub fn migrate(_deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, C
 /// Handling contract execution
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn execute(
-    _deps: DepsMut,
-    _env: Env,
-    _info: MessageInfo,
+    deps: DepsMut,
+    env: Env,
+    info: MessageInfo,
     msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
     match msg {
-        // Find matched incoming message variant and execute them with your custom logic.
-        //
-        // With `Response` type, it is possible to dispatch message to invoke external logic.
-        // See: https://github.com/CosmWasm/cosmwasm/blob/main/SEMANTICS.md#dispatching-messages
+        ExecuteMsg::DoSomething(_) => do_something(deps, env, info),
     }
+}
+
+pub fn do_something(
+    _deps: DepsMut,
+    _env: Env,
+    _info: MessageInfo,
+) -> Result<Response, ContractError> {
+    let data = crate::types::Data {
+        alpha: 0,
+        beta: 0,
+        gamma: 0,
+        delta: 0,
+        is_ok: true,
+    };
+    let b = serde_json::to_vec(&data).unwrap();
+    Ok(Response::new().set_data(b))
 }
 
 /// Handling contract query

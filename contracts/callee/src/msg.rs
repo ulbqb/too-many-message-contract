@@ -6,7 +6,15 @@ pub struct InstantiateMsg {}
 
 /// Message type for `execute` entry_point
 #[cw_serde]
-pub enum ExecuteMsg {}
+pub enum ExecuteMsg {
+    DoSomething(DoSomethingMsg),
+}
+
+#[cw_serde]
+pub struct DoSomethingMsg {
+    pub value_1: Option<u8>,
+    pub value_2: Option<u8>,
+}
 
 /// Message type for `migrate` entry_point
 #[cw_serde]

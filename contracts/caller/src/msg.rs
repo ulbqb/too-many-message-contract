@@ -2,11 +2,24 @@ use cosmwasm_schema::{cw_serde, QueryResponses};
 
 /// Message type for `instantiate` entry_point
 #[cw_serde]
-pub struct InstantiateMsg {}
+pub struct InstantiateMsg {
+    pub contract_1: String,
+    pub contract_2: String,
+    pub contract_3: String,
+    pub contract_4: String,
+    pub contract_5: String,
+}
 
 /// Message type for `execute` entry_point
 #[cw_serde]
-pub enum ExecuteMsg {}
+pub enum ExecuteMsg {
+    HogeHoge(HogeHogeMsg),
+}
+
+#[cw_serde]
+pub struct HogeHogeMsg {
+    pub value: u8,
+}
 
 /// Message type for `migrate` entry_point
 #[cw_serde]
